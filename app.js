@@ -18,10 +18,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors({}))
 //Setup API Routing 
-app.use(`${baseUrl}/Blog`, indexRouter.BlogRouter)
-app.use(`${baseUrl}/Review`, indexRouter.ReviewRouter)
-app.use(`${baseUrl}/requestForm`, indexRouter.requestFormRouter)
-app.use(`${baseUrl}/Contact`, indexRouter.ContactRouter)
+app.use(`/Blog`, indexRouter.BlogRouter)
+app.use(`/Review`, indexRouter.ReviewRouter)
+app.use(`/requestForm`, indexRouter.requestFormRouter)
+app.use(`/Contact`, indexRouter.ContactRouter)
 
 
 
