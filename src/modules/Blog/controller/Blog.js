@@ -7,7 +7,6 @@ import { pagination } from '../../../middleware/pagination.js';
 export const createBlog = asynchandler(async (req, res) => {
   const { title, author, content } = req.body;
 
-  // Optional: تأكد من وجود الحقول المطلوبة
   if (!title || !author || !content || !req.file) {
     return res.status(400).json({ message: 'الرجاء تعبئة جميع الحقول المطلوبة وإرفاق صورة' });
   }
@@ -47,8 +46,7 @@ export const getAllBlogs = asynchandler(async (req, res) => {
   
 });
 
-export const getBlogById = asynchandler
-(async (req, res) => {
+export const getBlogById = asynchandler(async (req, res) => {
 
     const blog = await BlogModel.findById(req.params.id);
     if (!blog) {
