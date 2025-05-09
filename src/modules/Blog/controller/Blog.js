@@ -33,7 +33,8 @@ export const createBlog = asynchandler(async (req, res) => {
 
 
 export const getAllBlogs = asynchandler(async (req, res) => {
-  
+   const { page, size } = req.query;
+    const { skip, limit } = pagination(page, size);
     const blogs = await BlogModel.find().sort({ date: -1 })
     .skip(skip)
     .limit(limit);;
