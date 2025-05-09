@@ -48,6 +48,9 @@ export const getAllBlogs = asynchandler(async (req, res) => {
 
 export const getBlogById = asynchandler(async (req, res) => {
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid Blog ID format" });
+  }
     const blog = await BlogModel.findById(req.params.id);
     if (!blog) {
    return next(Error('المقالة غير موجودة',{cause:404}))
