@@ -5,7 +5,7 @@ const router=Router()
 
 router.post("/create",myMulter(fileValidation.image).single("image"),BlogController.createBlog)
 router.get("/All-Blogs",BlogController.getAllBlogs)
-router.get("/:id",BlogController.getBlogById)
+router.get("/getBlog/:id",BlogController.getBlogById)
 
 
 export default router
