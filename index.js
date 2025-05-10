@@ -11,7 +11,7 @@ import connectDB from './DB/connection.js'
 import { GEH } from './src/services/errorHandling.js'
 const app = express()
 // setup port and the baseUrl
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 const baseUrl = process.env.BASEURL
 //convert Buffer Data
 app.use(express.json())
