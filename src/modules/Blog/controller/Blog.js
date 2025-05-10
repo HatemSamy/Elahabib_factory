@@ -31,26 +31,35 @@ export const createBlog = asynchandler(async (req, res, next) => {
 
   
 
-
 export const getAllBlogs = asynchandler(async (req, res, next) => {
-   const { page, size } = req.query;
-    const { skip, limit } = pagination(page, size);
-    const blogs = await BlogModel.find().sort({ date: -1 })
-    .skip(skip)
-    .limit(limit);;
-  if (!blogs) {
-    
-   return next(Error('فشل في جلب المقالات',{cause:404}))
+      const { page, size } = req.query;
 
-  }
-  res.json({message:"All Blogs", blogs});
-  
+    const { skip, limit } = pagination(page, size);
+    const blogs = await BlogModel.find()
+        .sort({ date: -1 })
+        .skip(skip)
+        .limit(limit);
+    
+    // total count of all blogs
+    const totalBlogs = await BlogModel.countDocuments();
+    
+    if (!blogs || blogs.length === 0) {
+        return next(new Error('فشل في جلب المقالات', { cause: 404 }));
+    }
+    
+    res.status(200).json({
+        blogs,
+        pagination: {
+            currentPage: parseInt(page),
+            totalPages: Math.ceil(totalBlogs / limit),
+            totalBlogs: totalBlogs,
+            blogsPerPage: parseInt(size)
+        }
+    });
 });
 
 export const getBlogById = asynchandler(async (req, res, next) => {
   const { BlogId } = req.params;
-  console.log(BlogId);
-  
     const blog = await BlogModel.findOne({ _id: BlogId });
     if (!blog) {
         return next(Error('المقالة غير موجودة', { cause: 404 }));

@@ -14,7 +14,6 @@ export const createRequestForm = asynchandler(async (req, res) => {
   });
 });
 
-// Get all submitted forms (admin)
 export const getAllRequestForms = asynchandler(async (req, res) => {
   const forms = await RequestFormModel.find().sort({ createdAt: -1 });
   res.status(200).json({message:"جميع الطلبات",forms});

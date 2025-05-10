@@ -8,6 +8,12 @@ const requestFormSchema = new mongoose.Schema({
   currentBusiness: { type: String },
   Notes: { type: String },
   hasWebsite: { type: Boolean,required: true  },
+  haveExperience: {   
+    type: Boolean,
+    required: true,  
+  }
+  
+
   
 }, {
   timestamps: true,
