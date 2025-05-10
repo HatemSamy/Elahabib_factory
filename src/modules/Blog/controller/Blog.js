@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import { pagination } from '../../../middleware/pagination.js';
 
 
-export const createBlog = asynchandler(async (req, res) => {
+export const createBlog = asynchandler(async (req, res, next) => {
   const { title, author, content } = req.body;
 
   if (!title || !author || !content || !req.file) {
@@ -32,7 +32,7 @@ export const createBlog = asynchandler(async (req, res) => {
   
 
 
-export const getAllBlogs = asynchandler(async (req, res) => {
+export const getAllBlogs = asynchandler(async (req, res, next) => {
    const { page, size } = req.query;
     const { skip, limit } = pagination(page, size);
     const blogs = await BlogModel.find().sort({ date: -1 })
@@ -47,13 +47,13 @@ export const getAllBlogs = asynchandler(async (req, res) => {
   
 });
 
-export const getBlogById = asynchandler(async (req, res) => {
-   
-    const blog = await BlogModel.findById(req.params.id);
+export const getBlogById = asynchandler(async (req, res, next) => {
+  const { BlogId } = req.params;
+  console.log(BlogId);
+  
+    const blog = await BlogModel.findOne({ _id: BlogId });
     if (!blog) {
-   return next(Error('المقالة غير موجودة',{cause:404}))
-
+        return next(Error('المقالة غير موجودة', { cause: 404 }));
     }
-     res.json({message:"Blog detials", blog});
-
-});
+    res.json({ message: "Blog details", blog });
+})

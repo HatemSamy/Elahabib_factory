@@ -5,7 +5,7 @@ import { asynchandler } from '../../../services/errorHandling.js';
 
 
 
-export const addReview =asynchandler (async (req, res) => {
+export const addReview =asynchandler (async (req, res, next) => {
     const { text, rating } = req.body;
   
     if (!text || !rating) {
@@ -24,7 +24,7 @@ export const addReview =asynchandler (async (req, res) => {
 
 
 
-export const getAllReviews = asynchandler(async (req, res) => {
+export const getAllReviews = asynchandler(async (req, res, next) => {
  
     const reviews = await ReviewModel.find().sort({ createdAt: -1 });
     if (!reviews) {
