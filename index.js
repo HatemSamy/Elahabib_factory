@@ -22,6 +22,8 @@ app.use(`/Blog`, indexRouter.BlogRouter)
 app.use(`/Review`, indexRouter.ReviewRouter)
 app.use(`/requestForm`, indexRouter.requestFormRouter)
 app.use(`/Contact`, indexRouter.ContactRouter)
+app.use(`/faq`, indexRouter.FAQRouter)
+
 
 
 
