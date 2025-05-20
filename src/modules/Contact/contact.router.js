@@ -6,7 +6,7 @@ import { validation } from "../../middleware/validation.js";
 
 
 
-router.post('/SentMessage', validation(contactValidation.SentMessage), ContactController.createContact);
+router.post('/SentMessage', validation(contactValidation.SentMessage), ContactController.SentContactReqestMessage);
 router.get('/ContactRequests', ContactController.AllContactRequest);
 
 
