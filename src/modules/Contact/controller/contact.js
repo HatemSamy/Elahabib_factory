@@ -38,7 +38,7 @@ export const AllContactRequest = asynchandler(async (req, res) => {
 `;
 
     const info = await sendEmail(
-      process.env.notificationEmail,
+      process.env.NOTIFICATION_EMAIL,
       'New Contact Request',
       email,
       htmlMessage
