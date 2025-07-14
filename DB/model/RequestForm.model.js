@@ -6,7 +6,7 @@ const requestFormSchema = new mongoose.Schema({
   email: { type: String , required: true },
   city: { type: String , required: true },
   currentBusiness: { type: String },
-  Notes: { type: String },
+  message: { type: String },
   hasWebsite: { type: Boolean,required: true  },
   haveExperience: {   
     type: Boolean,

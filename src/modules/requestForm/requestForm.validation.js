@@ -9,7 +9,7 @@ export const CreaterequestForm = {
         city: joi.string().required(),
         email: joi.string().required().email(),
         currentBusiness:joi.string(),
-        Notes:joi.string(),
+        message:joi.string(),
         hasWebsite: joi.boolean().required(),
         haveExperience: joi.boolean().required(),
 
