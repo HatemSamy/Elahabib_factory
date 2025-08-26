@@ -2,6 +2,7 @@
 import ContactModel from '../../../../DB/model/contact.model.js';
 import { sendEmail } from '../../../services/email.js';
 import { asynchandler } from '../../../services/errorHandling.js';
+import { generateContactRequestEmail } from '../../../services/emailTemplateService.js';
 
 
 export const AllContactRequest = asynchandler(async (req, res) => {
@@ -26,20 +27,17 @@ export const AllContactRequest = asynchandler(async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
 
-   const htmlMessage = `
-  <div style="max-width: 600px; margin: auto; padding: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: Arial, sans-serif;">
-    <h3 style="margin-bottom: 20px;">New Contact Request</h3>
-
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Message:</strong><br>${message}</p>
-  </div>
-`;
+    // Generate HTML email using the new template service
+    const htmlMessage = generateContactRequestEmail({
+      name,
+      email,
+      phone,
+      message
+    });
 
     const info = await sendEmail(
       process.env.NOTIFICATION_EMAIL,
-      'New Contact Request',
+      'طلب تواصل جديد - مصنع الحبيب لصناعة الأبواب',
       email,
       htmlMessage
     );

@@ -2,7 +2,7 @@
 import RequestFormModel from '../../../../DB/model/RequestForm.model.js';
 import { sendEmail } from '../../../services/email.js';
 import { asynchandler } from '../../../services/errorHandling.js';
-import { generateRequestFormEmail } from '../../../services/generateRequestFormEmail.js';
+import { generateRequestFormEmail } from '../../../services/emailTemplateService.js';
 
 
 
@@ -12,7 +12,7 @@ export const createRequestForm = asynchandler(async (req, res) => {
   const form = await RequestFormModel.create(req.body);
 
   const adminEmail = process.env.NOTIFICATION_EMAIL;
-  const subject = 'طلب جديد من خلال النموذج';
+  const subject = 'طلب امتياز تجاري جديد - مصنع الحبيب لصناعة الأبواب';
   const replyTo = req.body.email || undefined;
 
   const htmlMessage = generateRequestFormEmail(req.body);
